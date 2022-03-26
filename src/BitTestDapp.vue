@@ -100,7 +100,7 @@ export default {
       mintAmount: 1,
       maxmintAmount: 10,
 
-      mintCost: 0.05,
+      mintCost: 0.01,
       gasLimit: 400000,
 
       infoContent: "",
@@ -196,8 +196,13 @@ export default {
           return;
         }
 
-        let val = await getContract(provider).totalSupply();
-        this.boughtSupply = val;
+        this.mintAmount = 1;
+
+        //Fetch contract Data
+        this.boughtSupply = await getContract(provider).totalSupply();
+        this.totalSupply = await getContract(provider).maxSupply();
+        this.maxmintAmount = await getContract(provider).maxMintAmount();
+        this.mintCost = await getContract(provider).cost();
       } catch (error) {
         console.log(error);
       }
@@ -205,7 +210,7 @@ export default {
 
     mint: async function () {
       this.checkIfWalletIsConnected();
-      
+
       if (this.currentAccount == null) {
         //Try to connect Wallet
         this.connectWallet();
@@ -233,9 +238,7 @@ export default {
           const signer = provider.getSigner();
           const contractWithSigner = contract.connect(signer);
           /* global BigInt */
-          var cost = BigInt(
-            this.mintAmount * this.mintCost * 1000000000000000000
-          );
+          var cost = BigInt(this.mintAmount * this.mintCost.toString());
           var options = { gasLimit: this.gasLimit, value: cost };
           console.log(options);
 
@@ -257,7 +260,7 @@ export default {
 <style lang="scss" scoped>
 @font-face {
   font-family: Pixeled;
-  src: local("Pixeled"),url(./fonts/Pixeled.ttf) format("truetype");
+  src: local("Pixeled"), url(./fonts/Pixeled.ttf) format("truetype");
 }
 
 .container {
@@ -265,7 +268,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  
+
   height: 100%;
   display: flex;
   flex-direction: column;
