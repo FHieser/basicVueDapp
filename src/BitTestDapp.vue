@@ -1,79 +1,84 @@
 <template>
-  <div id="app" class="container">
-    <div class="header">
-      <div class="logo">
-        <img
-          class="mainLogo"
-          src="./assets/BitTest/BitBotsLogo.svg"
-          alt="BitBots Logo"
-        />
-      </div>
-      <v-spacer />
-      <div class="links">
-        <div class="homepage link">Homepage</div>
-        <div class="discord link">
-          <a href="https://discord.com/"
-            ><img src="./assets/logos/DiscordLogo.svg" alt="Discord"
-          /></a>
+  <v-app>
+    <div id="app" class="container">
+      <div class="header">
+        <div class="logo">
+          <img
+            class="mainLogo"
+            src="./assets/BitTest/BitBotsLogo.svg"
+            alt="BitBots Logo"
+          />
         </div>
-        <div class="twitter link">
-          <a href="https://twitter.com/"
-            ><img src="./assets/logos/TwitterLogo.svg" alt="Twitter"
-          /></a>
-        </div>
-        <div class="opensea link">
-          <a href="https://opensea.io/">
-            <img src="./assets/logos/OpenSeaLogo.svg" alt="OpenSea" />
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="alertHolder">
-      <v-alert
-        width="40rem"
-        v-model="alertActive"
-        border="left"
-        colored-border
-        type="error"
-        elevation="2"
-        dismissible
-        transition="scroll-x-transition"
-        :timeout="3000"
-      >
-        {{ alertText }}
-      </v-alert>
-    </div>
-
-    <div class="content">
-      <div class="leftImage contentImage">
-        <img
-          src="./assets/BitTest/BotsToTheRight.gif"
-          alt="Bots To the right"
-        />
-      </div>
-      <div class="mintSection">
-        <label for="" class="supply"
-          >{{ boughtSupply }}/{{ totalSupply }}</label
-        >
-        <div class="mintAmountArea">
-          <v-btn class="decrementBtn" @click="decrement">-</v-btn>
-          <div class="mintAmount">
-            <label>{{ mintAmount }}</label>
+        <v-spacer />
+        <div class="links">
+          <div class="homepage link">Homepage</div>
+          <div class="discord link">
+            <a href="https://discord.com/"
+              ><img src="./assets/logos/DiscordLogo.svg" alt="Discord"
+            /></a>
           </div>
-
-          <v-btn class="incrementBtn" @click="increment">+</v-btn>
+          <div class="twitter link">
+            <a href="https://twitter.com/"
+              ><img src="./assets/logos/TwitterLogo.svg" alt="Twitter"
+            /></a>
+          </div>
+          <div class="opensea link">
+            <a href="https://opensea.io/">
+              <img src="./assets/logos/OpenSeaLogo.svg" alt="OpenSea" />
+            </a>
+          </div>
         </div>
-        <v-btn class="mintBtn" @click="mint">{{ mintButtonText }}</v-btn>
       </div>
-      <div class="rightImage contentImage">
-        <img src="./assets/BitTest/BotsToTheLeft.gif" alt="Bots To the left" />
+
+      <div class="alertHolder">
+        <v-alert
+          width="40rem"
+          v-model="alertActive"
+          border="left"
+          colored-border
+          type="error"
+          elevation="2"
+          dismissible
+          transition="scroll-x-transition"
+          :timeout="3000"
+        >
+          {{ alertText }}
+        </v-alert>
+      </div>
+
+      <div class="content">
+        <div class="leftImage contentImage">
+          <img
+            src="./assets/BitTest/BotsToTheRight.gif"
+            alt="Bots To the right"
+          />
+        </div>
+        <div class="mintSection">
+          <label for="" class="supply"
+            >{{ boughtSupply }}/{{ totalSupply }}</label
+          >
+          <div class="mintAmountArea">
+            <v-btn class="decrementBtn" @click="decrement">-</v-btn>
+            <div class="mintAmount">
+              <label>{{ mintAmount }}</label>
+            </div>
+
+            <v-btn class="incrementBtn" @click="increment">+</v-btn>
+          </div>
+          <v-btn class="mintBtn" @click="mint">{{ mintButtonText }}</v-btn>
+        </div>
+        <div class="rightImage contentImage">
+          <img
+            src="./assets/BitTest/BotsToTheLeft.gif"
+            alt="Bots To the left"
+          />
+        </div>
+      </div>
+      <div class="infoBox">
+        <div class="gasInfo">Gas Limit: {{ gasLimit }}</div>
       </div>
     </div>
-    <div class="infoBox">
-      <div class="gasInfo">Gas Limit: {{ gasLimit }}</div>
-    </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
